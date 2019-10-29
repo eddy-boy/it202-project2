@@ -8,9 +8,15 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         
         <style>
-            h1 { color: blue; font-family: verdana; font-size: 200%; text-align: center; padding: 25px;}
+            h1 { color: gold; font-family: verdana; font-size: 300%; text-align: center; padding: 25px;}
+            h2 { color: gold; font-family: verdana; font-size: 200%; text-align: center; padding: 35px;}
+            .home-container {
+                text-align: center;
+            }
+            .spacing{
+                padding: 8px;
+            }
             .gradient { background-image: linear-gradient(red, #f06d06);}
-        
 		    .content {
 			    display: none;
 			    margin: 1em;
@@ -46,7 +52,6 @@
         
         <!-- the content divs -->
         <div class="content" id="home">
-            Search...
         </div>
         <div class="content" id="screen2">
             This is screen 2
@@ -54,33 +59,7 @@
         <div class="content" id="screen3">
             This is screen 3
         </div>
-        
-<!--         <div class="container">
-            <h1>Movies In the Park</h1> -->
-            
-<!--             <form>
-                <label class="checkbox-inline">
-                    <input type="checkbox" value="">Option 1
              
-                    <input type="checkbox" value="">Option 2
-               
-                    <input type="checkbox" value="">Option 3
-                </label>
-              </form> -->
-            
-            <!-- Search form -->        
-<!--             <form class="form-inline justify-content-center" action="/action_page.php">
-                <input type="text" class="form-control" id="userInput" placeholder="Search" name="userInput">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>-->
-            
-            <!-- Check form -->        
-           <!-- <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="movieOccurred">
-                <label class="form-check-label" for="movieOccurred">Upcoming Movies Only</label>
-              </div>
-        </div> -->
-     
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -94,13 +73,13 @@
                     $(".content").hide(); 
                 } 
                 
-                $(".nav-link").on("click", function(){ 
-                    hideScreens(); 
+                $(".nav-link").on("click", function(){
+                    hideScreens();
                     var target = $(this).attr("href");
-                    $(target).show();
                     $(target).load("page_content/_"+ target.replace("#","") + ".html");
+                    $(target).show();
                 });
             });
-       </script>                 
+       </script> 
     </body>
 </html>
