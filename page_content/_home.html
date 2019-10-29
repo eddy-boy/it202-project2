@@ -20,7 +20,7 @@
 
     <!-- Search form -->
     <form class="form-inline justify-content-center" action="/action_page.php">
-        <input type="text" class="form-control" id="userInput" placeholder="Search" name="userInput">
+        <input type="text" class="form-control" id="userInput" placeholder="Search" name="userInput" value="">
         <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
     </form>
 
@@ -38,7 +38,10 @@
     $(document).ready(function() {
         $("#movieOccurred").attr('checked', 'checked');
     });
-    
+</script>
+
+<script>
+
     // Handler for when button is clicked or enter is pressed 
     var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json"; 
             
@@ -46,7 +49,8 @@
         $("#submitButton").on("click", function(){
             var categories = document.getElementsByName('inlineRadioOptions');
             var category;
-            
+            var boxInput = document.getElementById('userInput').value;
+  
             // Check which category is selected  
             for (var i = 0; i < categories.length; i++){
                 if(categories[i].checked) {
@@ -55,23 +59,19 @@
             }
             
             // Check the value of the checked box
-            if (document.getElementById('movieOccurred').checked) {
-                
+            if (document.getElementById('movieOccurred').checked) {                
                // Upcoming movies
-                alert("checked " + category);
-                
+                alert("checked " + category + "  -->  " + boxInput);                
             } 
             else {
                 // Past movies
-                alert("You didn't check it! Let me check it for you. " + category);
+                $.get(endpoint + "?" + category + "=" + $(boxInput,
+                      function(response){
+                          $.each(response, function(i,v){
+                              $("body").append(v.name + "<br>");
+                          });
+                });                
             }
-            
-//             $.get(endpoint + "?department=" + $("#txtDepartment").val(),
-//                   function(response){
-//                       $.each(response, function(i,v){
-//                           $("body").append(v.name + "<br>");
-//                       });
-//                   });
          });
     });
     
