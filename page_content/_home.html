@@ -4,15 +4,15 @@
     <!-- Radio form -->
     <div class="spacing">
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Park">
             <label class="form-check-label" for="inlineRadio1">Park Name</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Title">
             <label class="form-check-label" for="inlineRadio2">Movie Title</label>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Day">
             <label class="form-check-label" for="inlineRadio3">Day</label>
         </div>   
     </div>
@@ -21,7 +21,7 @@
     <!-- Search form -->
     <form class="form-inline justify-content-center" action="/action_page.php">
         <input type="text" class="form-control" id="userInput" placeholder="Search" name="userInput">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
     </form>
 
     <!-- Check form -->
@@ -37,6 +37,42 @@
     // Have checkbox always be checked when loading the page 
     $(document).ready(function() {
         $("#movieOccurred").attr('checked', 'checked');
+    });
+    
+    // Handler for when button is clicked or enter is pressed 
+    var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json"; 
+            
+    $(document).ready(function(){
+        $("#submitButton").on("click", function(){
+            var categories = document.getElementsByName('inlineRadioOptions');
+            var category;
+            
+            // Check which category is selected  
+            for (var i = 0; i < categories.length; i++){
+                if(categories[i].checked) {
+                    category = categories[i].value;
+                }
+            }
+            
+            // Check the value of the checked box
+            if (document.getElementById('movieOccurred').checked) {
+                
+               // Upcoming movies
+                alert("checked " + category);
+                
+            } 
+            else {
+                // Past movies
+                alert("You didn't check it! Let me check it for you. " + category);
+            }
+            
+//             $.get(endpoint + "?department=" + $("#txtDepartment").val(),
+//                   function(response){
+//                       $.each(response, function(i,v){
+//                           $("body").append(v.name + "<br>");
+//                       });
+//                   });
+         });
     });
     
     
