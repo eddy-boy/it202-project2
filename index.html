@@ -56,6 +56,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#map">Map</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
                 </ul>
             </div>
         </nav> 
@@ -64,10 +67,13 @@
         <div class="content" id="home">
         </div>
         <div class="content" id="display">
-            This is screen 2
+            Display screen 
         </div>
         <div class="content" id="map">
-            This is screen 3
+            Map screen 
+        </div>
+        <div class="content" id="about">
+            About screen 
         </div>
              
         <!-- Optional JavaScript -->
@@ -81,9 +87,12 @@
             var t = "#home"
             var t1 = "#display";
             var t2 = "#map"
+            var t3 = "#about"
             $(t).load("page_content/_home.html");
             $(t1).load("page_content/_display.html");
             $(t2).load("page_content/_map.html");
+            $(t3).load("page_content/_about.html");
+
         </script>
         
         <script>

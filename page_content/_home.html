@@ -70,10 +70,11 @@
                 $.get(endpoint + "?" + category + "=" + boxInput,
                       function(response){
                           $(".content").hide();
+                          $.each(response, function(i,v){
+                              $("#display").append(v.title + "<br>");
+                          });
+                    
                           $("#display").show();
-//                           $.each(response, function(i,v){
-//                               $("body").append(v.day + "<br>");
-//                           });
                 });                
             }
          });
