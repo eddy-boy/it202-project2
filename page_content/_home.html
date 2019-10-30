@@ -44,9 +44,7 @@
 
 <script>
 
-    // Handler for when button is clicked or enter is pressed 
-    var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json"; 
-            
+    // Handler for when button is clicked or enter is pressed             
     $(document).ready(function(){
         $("#submitButton").on("click", function(){
             var categories = document.getElementsByName('inlineRadioOptions');
@@ -66,14 +64,12 @@
                 alert("checked " + category + "  -->  " + boxInput);                
             } 
             else {
+                var endPoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?" + category + "=" + boxInput
                 // Past movies
-                $.get(endpoint + "?" + category + "=" + boxInput,
-                      function(response){
+                $.get(endpoint,
+                      function(response){  
+                          sessionStorage.setItem("endpoint",endPoint);
                           $(".content").hide();
-                          $.each(response, function(i,v){
-                              $("#display").append(v.title + "<br>");
-                          });
-                    
                           $("#display").show();
                 });                
             }
