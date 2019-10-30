@@ -13,7 +13,7 @@
         </div>
         <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Day">
-            <label class="form-check-label" for="inlineRadio3">Day</label>
+            <label class="form-check-label" for="inlineRadio3">day</label>
         </div>   
     </div>
     
@@ -21,15 +21,17 @@
     <!-- Search form -->
     <form class="form-inline justify-content-center" action="/action_page.php">
         <input type="text" class="form-control" id="userInput" placeholder="Search" name="userInput" value="">
-        <button type="submit" id="submitButton" class="btn btn-primary">Submit</button>
+<!--         <button type="submit" id="submitButton" class="btn btn-primary">Submit</button> -->
     </form>
+    
+    <div class="spacing">
+        <button id="submitButton" class="btn btn-primary">Submit</button>
+    </div>
 
     <!-- Check form -->
-    <div class="spacing">
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="movieOccurred">
-            <label class="form-check-label" for="movieOccurred">Upcoming Movies Only</label>
-        </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="movieOccurred">
+        <label class="form-check-label" for="movieOccurred">Upcoming Movies Only</label>
     </div>
 </div>
 
@@ -65,11 +67,11 @@
             } 
             else {
                 // Past movies
-                $.get(endpoint + "?" + category + "=" + $(boxInput,
+                $.get(endpoint + "?" + category + "=" + boxInput,
                       function(response){
-                          $.each(response, function(i,v){
-                              $("body").append(v.name + "<br>");
-                          });
+//                           $.each(response, function(i,v){
+//                               $("body").append(v.day + "<br>");
+//                           });
                 });                
             }
          });
