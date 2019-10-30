@@ -1,16 +1,129 @@
-<div id="map"></div>
-<script>
-    // This example displays a marker at the center of Australia.
-    // When the user clicks the marker, an info window opens.
+<!-- <div id="map"></div>
+
+<!-- <script>
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 10,
+      center: {lat:41.881832, lng:-87.623177)
+    });
+        
+    // Create an array of alphabetical characters used to label the markers.
+    var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+    var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+    });
+     
+    // Add a marker clusterer to manage the markers.
+    var markerCluster = new MarkerClusterer(map, markers,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     
-    function initMap() {
-        var chicago = {lat: 41.881832, lng: -87.623177};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 10,
-            center: chicago 
-        });
-    }
+    var locations = [
+        {lat: -31.563910, lng: 147.154312},
+        {lat: -33.718234, lng: 150.363181},
+        {lat: -33.727111, lng: 150.371124},
+        {lat: -33.848588, lng: 151.209834},
+        {lat: -33.851702, lng: 151.216968},
+        {lat: -34.671264, lng: 150.863657},
+        {lat: -35.304724, lng: 148.662905},
+        {lat: -36.817685, lng: 175.699196},
+        {lat: -36.828611, lng: 175.790222},
+        {lat: -37.750000, lng: 145.116667},
+        {lat: -37.759859, lng: 145.128708},
+        {lat: -37.765015, lng: 145.133858},
+        {lat: -37.770104, lng: 145.143299},
+        {lat: -37.773700, lng: 145.145187},
+        {lat: -37.774785, lng: 145.137978},
+        {lat: -37.819616, lng: 144.968119},
+        {lat: -38.330766, lng: 144.695692},
+        {lat: -39.927193, lng: 175.053218},
+        {lat: -41.330162, lng: 174.865694},
+        {lat: -42.734358, lng: 147.439506},
+        {lat: -42.734358, lng: 147.501315},
+        {lat: -42.735258, lng: 147.438000},
+        {lat: -43.999792, lng: 170.463352}
+      ]
+
+//     var markers = [];
+      
+//     var endpoint = sessionStorage.getItem("endpoint");
+//     $.getJSON(endpoint, function(data){        
+//         $.each(data, function(key, value){
+//             var latLng = new google.maps.LatLng(value.location.latitude, value.location.longitude);
+//             var marker = new google.maps.Marker({position: latLng});
+//             markers.push(marker);
+//         }); 
+//     });
+      
+//     var markerCluster = new MarkerClusterer(map, markers);
+//     google.maps.event.addDomListener(window, 'load', initialize);
+      
 </script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
 <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRgZ7GE28CVpuq6lQJLEzEgCMG6sO6aPw&callback=initMap">
-</script>
+</script> 
+
+ -->
+
+<div id="map"></div>
+    <script>
+
+      
+
+      function initMap() {
+        var center = {lat:41.881832, lng:-87.623177};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: center
+        });
+          
+       var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+            'sandstone rock formation in the southern part of the '+
+            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+            'south west of the nearest large town, Alice Springs; 450&#160;km '+
+            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+            'Aboriginal people of the area. It has many springs, waterholes, '+
+            'rock caves and ancient paintings. Uluru is listed as a World '+
+            'Heritage Site.</p>'+
+            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+            '(last visited June 22, 2009).</p>'+
+            '</div>'+
+            '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+          
+//        var markers = [];
+       var endpoint = sessionStorage.getItem("endpoint");
+       $.getJSON(endpoint, function(data){        
+           $.each(data, function(key, value){
+               var marker = new google.maps.Marker({
+                   position: {lat: parseFloat(value.location.latitude), lng: parseFloat(value.location.longitude) },
+                   map: map,
+                   title :" value.title"
+               }); 
+               marker.addListener('click', function() {
+                  infowindow.open(map, marker);
+               });
+               //markers.push(marker);
+           });
+       });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRgZ7GE28CVpuq6lQJLEzEgCMG6sO6aPw&callback=initMap">
+    </script>
