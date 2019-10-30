@@ -78,6 +78,15 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 
         <script>
+            var t = "#home"
+            var t1 = "#display";
+            var t2 = "#map"
+            $(t).load("page_content/_home.html");
+            $(t1).load("page_content/_display.html");
+            $(t2).load("page_content/_map.html");
+        </script>
+        
+        <script>
             $(document).ready(function() { 
                 function hideScreens() { 
                     $(".content").hide(); 
@@ -86,7 +95,7 @@
                 $(".nav-link").on("click", function(){
                     hideScreens();
                     var target = $(this).attr("href");
-                    $(target).load("page_content/_"+ target.replace("#","") + ".html");
+//                     $(target).load("page_content/_"+ target.replace("#","") + ".html");
                     $(target).show();
                 });
             });
