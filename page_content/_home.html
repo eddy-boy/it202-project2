@@ -61,11 +61,24 @@
             // Check the value of the checked box
             if (document.getElementById('movieOccurred').checked) {                
                // Upcoming movies
-                alert("checked " + category + "  -->  " + boxInput);                
+               var today = new Date();
+               var day = String(today.getDate()).padStart(2, '0');
+               var month = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+               var year = today.getFullYear(); 
+                
+               var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?$where=date%20not%20between%20%272019-01-10T00:00:00%27%20and%20%272059-06-10T00:00:00%27";
+               $.get(endpoint,
+                      function(response){  
+                          sessionStorage.setItem("endpoint",endPoint);
+                          $(".content").hide();
+                          $("#display").show();
+                });     
+
             } 
             else {
-                var endPoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?" + category + "=" + boxInput
                 // Past movies
+                var endPoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?" + category + "=" + boxInput;
+
                 $.get(endpoint,
                       function(response){  
                           sessionStorage.setItem("endpoint",endPoint);
