@@ -1,0 +1,94 @@
+<div class="home-container">
+    <h1>Movies In the Park</h1> 
+
+    <!-- Radio form -->
+    <div class="spacing">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Park">
+            <label class="form-check-label" for="inlineRadio1">Park Name</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Title">
+            <label class="form-check-label" for="inlineRadio2">Movie Title</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Day">
+            <label class="form-check-label" for="inlineRadio3">day</label>
+        </div>   
+    </div>
+    
+
+    <!-- Search form -->
+    <form class="form-inline justify-content-center" action="/action_page.php">
+        <input type="text" class="form-control" id="userInput" placeholder="Search" name="userInput" value="" onkeydown="return (event.keyCode!=13);">
+<!--         <button type="submit" id="submitButton" class="btn btn-primary">Submit</button> -->
+    </form>
+    
+    <div class="spacing">
+        <button id="submitButton" class="btn btn-primary">Submit</button>
+    </div>
+
+    <!-- Check form -->
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="movieOccurred">
+        <label class="form-check-label" for="movieOccurred">Upcoming Movies Only</label>
+    </div>
+</div>
+
+<script>
+    // Have checkbox always be checked when loading the page 
+    $(document).ready(function() {
+        $("#movieOccurred").attr('checked', 'checked');
+    });
+</script>
+
+<script>
+
+    // Handler for when button is clicked or enter is pressed             
+    $(document).ready(function(){
+        $("#submitButton").on("click", function(){
+            var categories = document.getElementsByName('inlineRadioOptions');
+            var category;
+            var boxInput = document.getElementById('userInput').value;
+  
+            // Check which category is selected  
+            for (var i = 0; i < categories.length; i++){
+                if(categories[i].checked) {
+                    category = categories[i].value;
+                }
+            }
+            
+            // Check the value of the checked box
+            if (document.getElementById('movieOccurred').checked) {                
+               // Upcoming movies            
+               var endpoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?$where=date%20not%20between%20%272019-10-10T00:00:00%27%20and%20%272029-06-10T00:00:00%27";
+               $.get(endpoint,
+                      function(response){  
+                          sessionStorage.setItem("endpoint",endPoint);
+                          $(".content").hide();
+                          $("#display").load("../page_content/_display.html");
+                          $("#map").load("../page_content/_map.html");
+                          $("#display").show();
+                });     
+
+            } 
+            else {
+                // Past movies
+                var endPoint = "https://data.cityofchicago.org/resource/7piw-z6r6.json?" + category + "=" + boxInput;
+
+                $.get(endpoint,
+                      function(response){  
+                          sessionStorage.setItem("endpoint",endPoint);
+                          $(".content").hide();
+                          $("#display").load("../page_content/_display.html");
+                          $("#map").load("../page_content/_map.html");
+                          $("#display").show();
+                });                
+            }
+         });
+    });
+    
+    
+    
+    
+</script>
